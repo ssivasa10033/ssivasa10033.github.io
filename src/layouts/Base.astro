@@ -1,0 +1,141 @@
+---
+import "@fontsource/atkinson-hyperlegible/400.css";
+import "@fontsource/atkinson-hyperlegible/700.css";
+import "@fontsource/fraunces/400.css";
+import "@fontsource/fraunces/400-italic.css";
+import "@fontsource/fraunces/600.css";
+import "@fontsource/fraunces/700.css";
+import "../styles/global.css";
+
+const { title, description, current = "" } = Astro.props;
+const nav = [
+  ["/", "Home"],
+  ["/understanding/", "Understanding"],
+  ["/symptoms/", "Symptoms"],
+  ["/treatment/", "Treatment"],
+  ["/questions/", "Questions"],
+  ["/community/", "Community"],
+  ["/resources/", "Resources"],
+  ["/about/", "About"],
+];
+const GROUP_URL = "https://www.facebook.com/share/g/14jtya1TGU2/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} &middot; Pelvic Organ Prolapse Support Society</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#1d3327" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      (function () {
+        var s = localStorage.getItem("popss-size");
+        if (s) document.documentElement.className = s;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <div class="utility">
+      <div class="utility-inner">
+        <span class="utility-note">A free community resource</span>
+        <div class="text-size" id="text-size">
+          <span aria-hidden="true">Text size</span>
+          <button type="button" data-size="" aria-pressed="true" aria-label="Standard text size">A</button>
+          <button type="button" data-size="size-1" aria-pressed="false" aria-label="Larger text size">A</button>
+          <button type="button" data-size="size-2" aria-pressed="false" aria-label="Largest text size">A</button>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="/">Pelvic Organ Prolapse<br />Support Society</a>
+      <div class="brand-rule" aria-hidden="true"></div>
+      <p class="brand-sub">Information &middot; Answers &middot; Community</p>
+    </header>
+
+    <nav class="site-nav" aria-label="Main">
+      <div class="nav-inner">
+        {nav.map(([href, label]) => (
+          <a href={href} aria-current={current === href ? "page" : undefined}>{label}</a>
+        ))}
+      </div>
+    </nav>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <div class="closer">
+      <div class="closer-inner">
+        <div class="closer-col">
+          <span class="label">Before anything else</span>
+          <h2>Talk to someone who can examine you</h2>
+          <p>
+            Nothing on this site replaces your own doctor, gynecologist, or
+            pelvic health physiotherapist. If something here sounds like you,
+            book the appointment. No symptom is too small or too embarrassing
+            to mention.
+          </p>
+        </div>
+        <div class="closer-col">
+          <span class="label">And when you are ready</span>
+          <h2>You do not have to figure this out alone</h2>
+          <p>
+            Our free, private Facebook community is full of women who
+            understand, because they have lived it. Questions welcome.
+            Judgment never.
+          </p>
+          <a class="btn" href={GROUP_URL} rel="noopener">Join the community</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p class="disclaimer">
+          <strong>Please read:</strong> the information on this website is
+          provided for general education and awareness. It is not medical
+          advice, and it is not a substitute for diagnosis, treatment, or
+          guidance from a qualified healthcare provider. Every person's
+          situation is different, so please talk to your doctor about your own
+          health. If you are experiencing severe pain, heavy bleeding, fever
+          after surgery, or inability to urinate, seek medical care right away.
+        </p>
+        <p class="colophon">
+          &copy; 2026 Pelvic Organ Prolapse Support Society &middot;
+          <a href="/about/">About &amp; contact</a> &middot;
+          <a href={GROUP_URL} rel="noopener">Facebook group</a>
+        </p>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        var wrap = document.getElementById("text-size");
+        if (!wrap) return;
+        var buttons = wrap.querySelectorAll("button");
+        function apply(cls) {
+          document.documentElement.className = cls;
+          localStorage.setItem("popss-size", cls);
+          buttons.forEach(function (b) {
+            b.setAttribute("aria-pressed", String(b.dataset.size === cls));
+          });
+        }
+        buttons.forEach(function (b) {
+          b.addEventListener("click", function () { apply(b.dataset.size); });
+        });
+        var saved = localStorage.getItem("popss-size") || "";
+        buttons.forEach(function (b) {
+          b.setAttribute("aria-pressed", String(b.dataset.size === saved));
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+---
+import Base from "../layouts/Base.astro";
+const checks = [
+  "I feel heaviness, pressure, or a dragging feeling in my pelvis",
+  "I feel or see a bulge in or at the opening of my vagina",
+  "My symptoms get worse as the day goes on, or after standing or lifting",
+  "I leak urine when I cough, sneeze, laugh, or exercise",
+  "I have trouble fully emptying my bladder or bowels",
+  "Sex has become uncomfortable, or sensation has changed",
+  "These feelings have lasted more than a few weeks",
+];
+---
+<Base
+  title="Symptoms and self check"
+  description="What pelvic organ prolapse commonly feels like, plus a private two minute self check. Your answers are never stored or shared."
+  current="/symptoms/"
+>
+  <div class="narrow">
+    <span class="label">Symptoms</span>
+    <h1>What prolapse actually feels like</h1>
+    <p>
+      Many women carry these symptoms for years before mentioning them to
+      anyone. Some are embarrassed. Some assume it is just part of getting
+      older. Some genuinely have no words for what they are feeling. You deserve
+      better than years of wondering, so here is what prolapse commonly feels
+      like.
+    </p>
+
+    <h2>Common experiences</h2>
+    <ul class="spaced">
+      <li>Heaviness, pressure, or a dragging feeling in the pelvis or vagina</li>
+      <li>A sense of a bulge or lump in the vagina. Some women can see or feel tissue at the opening</li>
+      <li>The feeling that something is falling out, especially by the end of the day or after long standing</li>
+      <li>Leaking urine when you cough, sneeze, laugh, or exercise</li>
+      <li>Trouble fully emptying the bladder or bowels, or needing to press on the vagina to pass a bowel movement</li>
+      <li>Discomfort or reduced sensation during sex</li>
+      <li>A low back ache that eases when you lie down</li>
+    </ul>
+    <p>
+      Symptoms are usually mildest in the morning and build through the day.
+      Having one or two of these does not mean you have prolapse, since several
+      other conditions cause similar feelings. All of them are still worth
+      mentioning to a healthcare provider.
+    </p>
+  </div>
+
+  <section class="band">
+    <div class="narrow">
+      <div class="section-head">
+        <span class="label">Two minutes, completely private</span>
+        <h2 id="selfcheck-h">Is it worth talking to someone?</h2>
+        <p>
+          This is not a diagnosis and it cannot tell you whether you have
+          prolapse. It just helps you notice patterns in what you have been
+          feeling, so you can decide whether to raise it with a doctor or a
+          pelvic health physiotherapist.
+        </p>
+      </div>
+
+      <p class="privacy-note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg>
+        Your answers stay on your device. They are never saved, stored, or shared with anyone.
+      </p>
+
+      <form id="selfcheck" aria-labelledby="selfcheck-h">
+        <fieldset style="border:none;padding:0;margin:1rem 0 0;">
+          <legend style="position:absolute;left:-9999px;">Check all that apply to you</legend>
+          {checks.map((c, i) => (
+            <label class="check-item">
+              <input type="checkbox" name={"c" + i} />
+              <span>{c}</span>
+            </label>
+          ))}
+        </fieldset>
+        <p style="margin-top:1.4rem;">
+          <button type="submit" class="btn">See what this might mean</button>
+        </p>
+      </form>
+
+      <div id="result-many" class="check-result callout" hidden aria-live="polite">
+        <p>
+          <strong>Several of the things you noticed are commonly associated with
+          pelvic floor conditions, including prolapse.</strong>
+        </p>
+        <p>
+          That does not mean you have prolapse. It does mean this is worth a
+          conversation. A doctor or pelvic health physiotherapist can assess you
+          properly, and there are effective options at every stage.
+        </p>
+        <p>
+          It may also help to talk with women who have been where you are.
+          <a href="/community/">Our community</a> is free and private.
+        </p>
+      </div>
+      <div id="result-few" class="check-result callout" hidden aria-live="polite">
+        <p>
+          <strong>Nothing here points strongly toward prolapse.</strong> A quick
+          check like this cannot rule anything out, though, and you know your
+          body better than any list does.
+        </p>
+        <p>
+          If something feels off, or it is bothering you, it is always worth
+          raising with your doctor. No symptom is too small or too embarrassing
+          to mention.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="narrow">
+    <h2>See a doctor promptly if</h2>
+    <ul class="spaced">
+      <li>You suddenly cannot urinate or empty your bowels</li>
+      <li>You have heavy vaginal bleeding</li>
+      <li>Prolapsed tissue is outside the body and has become painful or ulcerated, or will not go back in</li>
+      <li>You have a fever or worsening pain after a pelvic procedure or surgery</li>
+    </ul>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById("selfcheck");
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var checked = form.querySelectorAll("input:checked").length;
+        var many = document.getElementById("result-many");
+        var few = document.getElementById("result-few");
+        var show = checked >= 3 ? many : few;
+        var hide = checked >= 3 ? few : many;
+        hide.hidden = true;
+        show.hidden = false;
+        show.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    })();
+  </script>
+</Base>

@@ -1,0 +1,51 @@
+---
+import Base from "../layouts/Base.astro";
+const GROUP_URL = "https://www.facebook.com/share/g/14jtya1TGU2/";
+---
+<Base
+  title="About and contact"
+  description="About the Pelvic Organ Prolapse Support Society and how to reach us."
+  current="/about/"
+>
+  <div class="narrow">
+    <span class="label">About us</span>
+    <h1>Why this site exists</h1>
+    <p>
+      This website is a project of the Pelvic Organ Prolapse Support Society, an
+      online community working to break the silence around pelvic organ
+      prolapse. No woman should have to discover this condition alone at two in
+      the morning with only a search bar for company.
+    </p>
+    <p>Our aims are simple.</p>
+    <ul class="spaced">
+      <li>Explain prolapse in plain language</li>
+      <li>Present every option honestly, including the parts that usually get glossed over</li>
+      <li>Connect women with a community that understands</li>
+    </ul>
+
+    <div class="panel">
+      <h2>Get in touch</h2>
+      <p>
+        The best way to reach us is inside the community itself. Post your
+        question in our
+        <a href={GROUP_URL} rel="noopener">Facebook group</a> and an admin or
+        one of the members will get back to you.
+      </p>
+      <p>
+        Please note that we cannot give medical advice, in the group or
+        anywhere else. For anything to do with your health, contact your
+        healthcare provider.
+      </p>
+    </div>
+
+    <h2>About this information</h2>
+    <p>
+      Content on this site draws on reputable medical sources, including the
+      Cleveland Clinic, peer reviewed urogynecology journals, Cochrane reviews,
+      and patient advocacy organizations. Our community admins review it for
+      tone and accuracy, and we update it as the evidence changes. It is
+      educational only, and it is never a substitute for care from your own
+      provider.
+    </p>
+  </div>
+</Base>

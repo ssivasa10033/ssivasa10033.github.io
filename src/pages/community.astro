@@ -1,0 +1,42 @@
+---
+import Base from "../layouts/Base.astro";
+const GROUP_URL = "https://www.facebook.com/share/g/14jtya1TGU2/";
+---
+<Base
+  title="Community"
+  description="Join the Pelvic Organ Prolapse Support Society, a free and private Facebook community for women with prolapse."
+  current="/community/"
+>
+  <div class="narrow">
+    <span class="label">Community</span>
+    <h1>Women who have already been where you are</h1>
+    <p>
+      The Pelvic Organ Prolapse Support Society started as a Facebook group and
+      grew into what it is now. It is a place where women ask the questions they
+      cannot ask anywhere else, about symptoms, surgeries, pessaries, intimacy,
+      fear, and hope, and get answers from people who genuinely understand,
+      because they have lived it.
+    </p>
+
+    <h2>What you will find inside</h2>
+    <ul class="spaced">
+      <li>Real experiences. Pre op nerves, post op diaries, pessary tips, the wins and the setbacks</li>
+      <li>A judgment free space to ask anything, at any hour</li>
+      <li>Encouragement from women at every stage, from newly diagnosed to years past surgery</li>
+    </ul>
+
+    <div class="panel">
+      <h2>Our ground rules</h2>
+      <ul class="spaced">
+        <li><strong>Kindness first.</strong> No judgment and no shame.</li>
+        <li><strong>Shared experience is not medical advice.</strong> Always confirm decisions with your own healthcare provider.</li>
+        <li><strong>What is shared in the group stays in the group.</strong> Privacy is sacred here.</li>
+      </ul>
+    </div>
+
+    <p>It is free, it is private, and you will be welcomed.</p>
+    <p style="margin-top:1.6rem;">
+      <a class="btn btn--plum" href={GROUP_URL} rel="noopener">Join the Facebook group</a>
+    </p>
+  </div>
+</Base>
