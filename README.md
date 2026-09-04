@@ -13,12 +13,35 @@ npm run preview  # preview the production build
 
 ## Deploying
 
-The site builds to fully static HTML, no server needed.
+**Live at https://ssivasa10033.github.io/**
 
-**Vercel:** import the repo, framework preset "Astro", deploy. Nothing else to configure.
-**Netlify:** build command `npm run build`, publish directory `dist`.
+Deployment is automatic. Every push to `main` triggers
+`.github/workflows/deploy.yml`, which runs `npm ci && npm run build` and
+publishes `dist/` to GitHub Pages. Nothing to do by hand.
 
-Before launch, set the real domain in `astro.config.mjs` (`site:` field) so canonical URLs and any future sitemap are correct.
+```bash
+git add -A && git commit -m "your change" && git push
+```
+
+Watch a deploy with `gh run watch`. A build takes roughly a minute.
+
+### Attaching a custom domain
+
+The repo is named `ssivasa10033.github.io`, so the site serves from the **root**
+of its domain. Every internal link is root absolute, which is why this matters:
+a project repo would serve under `/repo-name/` and break all of them.
+
+To move to a real domain later:
+
+1. Add the domain in Settings, Pages, Custom domain on GitHub.
+2. At your registrar, point the apex at GitHub with four A records:
+   `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
+   For a `www` subdomain use a CNAME to `ssivasa10033.github.io` instead.
+3. Update `site:` in `astro.config.mjs` to the new URL.
+4. Tick Enforce HTTPS once the certificate is issued.
+
+No `base` config is needed at any point, because the site is at the root both
+before and after the move.
 
 ## Structure
 
@@ -89,8 +112,8 @@ The medical disclaimer appears in the footer of every page via the layout, don't
 
 ## Before launch, outstanding items
 
-- [ ] Confirm contact email (`src/pages/about.astro` has a placeholder)
-- [ ] Confirm the Facebook group join link is final (currently in `Base.astro` and `community.astro`)
+- [x] Contact route decided: the About page points people to the Facebook group
+- [ ] Confirm the Facebook group link is final. It now appears in three files: `Base.astro`, `community.astro`, and `about.astro`
 - [x] Favicon added (`public/favicon.svg`)
 - [ ] Add an Open Graph share image (`public/`). Group members will share links on Facebook, so the OG preview matters more than usual here
 - [ ] Add member stories if admins supply them with written permission
