@@ -355,6 +355,9 @@ main > .wrap, main > .narrow { padding-block: clamp(2.5rem, 6vw, 4rem); }
 .btn--quiet { background: transparent; color: var(--forest-deep); border-color: var(--forest); }
 .btn--quiet:hover { background: var(--forest); color: #fff; border-color: var(--forest); }
 
+/* Button rows sit on the shared centre axis, even inside a text column. */
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+
 /* Lists */
 
 ul.spaced { list-style: none; padding: 0; margin: 1.4rem 0; }
@@ -401,6 +404,37 @@ ul.spaced li::before {
   padding: 0.7rem 0; margin: 1.2rem 0;
 }
 .privacy-note svg { flex: none; }
+
+/* Contact form */
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+.contact-form { margin-top: 1.8rem; }
+.field { margin-bottom: 1.3rem; }
+.field label { display: block; font-weight: 700; margin-bottom: 0.35rem; }
+.field .req { font-weight: 400; color: var(--ink-soft); font-size: 0.85rem; }
+.field input, .field textarea {
+  display: block; width: 100%;
+  min-height: 48px; padding: 0.65rem 0.8rem;
+  font: inherit; color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--rule-mid);
+  border-left: 3px solid var(--rule-mid);
+  border-radius: 2px;
+}
+.field textarea { resize: vertical; line-height: 1.6; }
+.field input:hover, .field textarea:hover { border-left-color: var(--forest); }
+.contact-form .btn:disabled { opacity: 0.6; cursor: progress; }
+.form-status--ok, .form-status--error {
+  margin-top: 1.4rem; padding: 1rem 1.2rem;
+  background: var(--paper-warm);
+  border-left: 3px solid var(--forest);
+}
+.form-status--error { border-left-color: var(--clay); }
+.form-status p { margin: 0; }
+.form-alt { margin-top: 1.8rem; color: var(--ink-soft); text-align: center; }
 
 /* Breadcrumb */
 
